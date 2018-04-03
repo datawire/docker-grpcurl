@@ -19,5 +19,6 @@ RUN apk --no-cache add ca-certificates \
   && grpcurl --help \
   && apk del --purge build-dependencies
 
+WORKDIR /grpcurl
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
