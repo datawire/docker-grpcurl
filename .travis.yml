@@ -1,0 +1,19 @@
+---
+language: generic
+sudo: false
+
+services:
+  - docker
+
+env:
+  global:
+    - secure: "RMlZzJ3dfrka2B/+7ahQ/Bg9UYwMcCxL99E+WyHLHg2lsJZ+3RS/KzAieFnL9CC6z8lnBOYkS/e98wagtm5u27EPXPQgOwXtad9xsFal1X9trn8or3guuOm6cRFWwNNVGIi86rp1e76PNP9snz+vxXG0AcNst8AkKV5gl4thgl9043QkNfQEkkRGTPK3dXHmC/3X7JssMse4VsOorsDGengILCP1zNfFNhbXoc7nNSZsfdjqH7H2EfS0xs+MPWNQEEC9q7PrfpQoLSlf69s9Ic+Vg5tIuQd+n626cSPAfyCQTOWjlOkPJZq6tizKjV2V7oc9NDp/zhMwwP2gYbq91CvltT5yjLQdAGZilWBH7no1djZ5s4+4DkF2NRq6sE13dFJL7SkmbfLPqqoEbnvzyrc1fjBg5NQXHbL6WvL3cj+Y0Bk2AMr5NDA+gPTooXx7eOgmDVabMFbQ0cs3Pz3WMJn2QvtxjYaUsg22tjVIlgfO9aSASETQ2Hrr9QeLtq3NkVcaFT3zBPDfGI/BtuZi9eSYLt3ZngcH3NvxwKy33+6vwfDlNCAqm1i0IB9e7nbeVai+k1Tb+qBc8dNITluI6fngTcWm1dGOd/0sAHm7lz6twDeVAEoWtzPUgLJcyTBoPFhPJGr8FNcpPJ4JoAWWA59QElyfjmVOPJk8p4y+arE="
+
+before_script:
+  - echo ${QUAYIO_PASSWORD} | docker login -u="datawire+releasebot" --password-stdin quay.io
+
+script:
+  - docker build -t quay.io/datawire/kops:latest .
+  - docker push quay.io/datawire/kops:latest
+
+after_script: []
